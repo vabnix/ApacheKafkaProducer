@@ -68,7 +68,7 @@ public class KafkaApplication {
         for (int i = 0; i < 10; i++){
             String topic = "first_spring_topic";
             String value = "Hello Vaibhav " + i;
-            String key = "id_"+1;
+            String key = "id_"+ i;
 
             ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
             //Sending data

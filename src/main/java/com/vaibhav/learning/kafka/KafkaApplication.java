@@ -28,7 +28,6 @@ public class KafkaApplication {
         CallProducerWithKey(properties);
 
 
-
         SpringApplication.run(KafkaApplication.class, args);
     }
 
@@ -37,15 +36,15 @@ public class KafkaApplication {
         //Creating Producer
         KafkaProducer kafkaProducer = new KafkaProducer(properties);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             ProducerRecord<String, String> record = new ProducerRecord<>("first_spring_topic", "Hello Vaibhav " + i);
             //Sending data
             kafkaProducer.send(record, new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if(exception == null){
+                    if (exception == null) {
                         logger.info(metadata.timestamp() + " Received new Metadata " +
-                                " Topic: " + metadata.topic()  +
+                                " Topic: " + metadata.topic() +
                                 " Partition " + metadata.partition() +
                                 " Has Offset " + metadata.hasOffset() +
                                 " Offset " + metadata.offset());
@@ -65,19 +64,19 @@ public class KafkaApplication {
         Logger logger = LoggerFactory.getLogger(KafkaApplication.class);
         KafkaProducer kafkaProducer = new KafkaProducer(properties);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             String topic = "first_spring_topic";
             String value = "Hello Vaibhav " + i;
-            String key = "id_"+ i;
+            String key = "id_" + i;
 
-            ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
+            ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, value);
             //Sending data
             kafkaProducer.send(record, new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if(exception == null){
+                    if (exception == null) {
                         logger.info(metadata.timestamp() + " Received new Metadata " +
-                                " Topic: " + metadata.topic()  +
+                                " Topic: " + metadata.topic() +
                                 " Partition " + metadata.partition() +
                                 " Has Offset " + metadata.hasOffset() +
                                 " Offset " + metadata.offset());
